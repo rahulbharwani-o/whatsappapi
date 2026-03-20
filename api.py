@@ -9,6 +9,17 @@ from whatsapp_core import send_whatsapp_message
 app = Flask(__name__)
 wa_state = {"status": "idle", "qr_code": None}
 
+@app.route('/', methods=['GET'])
+def health_check():
+    """Simple endpoint to verify if the server is live and healthy."""
+    return jsonify({
+        "status": "online",
+        "service": "Standalone WhatsApp Automation Microservice",
+        "engine": "Playwright Headless Chromium",
+        "current_wa_state": wa_state["status"]
+    }), 200
+
+
 def headless_qr_scanner():
     global wa_state
     print("[SCANNER] Clearing old session to generate a fresh QR...")
@@ -95,6 +106,6 @@ def send_message():
 
 if __name__ == '__main__':
     print("🚀 WhatsApp API Server Started!")
-    print("Listening on http://0.0.0.0:5001")
+    print("Listening on http://0.0.0.0:8000")
     # Host 0.0.0.0 is used so it binds on all server network interfaces (for VPS deployments)
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)
