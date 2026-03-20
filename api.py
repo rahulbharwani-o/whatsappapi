@@ -106,6 +106,6 @@ def send_message():
 
 if __name__ == '__main__':
     print("🚀 WhatsApp API Server Started!")
-    print("Listening on http://0.0.0.0:8000")
+    print("Listening on http://0.0.0.0:5100")
     # Host 0.0.0.0 is used so it binds on all server network interfaces (for VPS deployments)
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=5100, debug=True)
